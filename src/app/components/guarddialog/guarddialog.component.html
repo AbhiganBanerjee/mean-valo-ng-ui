@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="text-bg-danger font-monospace fw-bold">
+    Login Required
+</h1>
+<div mat-dialog-content class="text-danger font-monospace fw-bold">
+    {{isScreenSize?'Please Login First To Access Features.':'In order to access this Feature Please Login First!'}}
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close color="warn" class="font-monospace fw-bold">
+        <mat-icon>close</mat-icon> CLOSE
+    </button>
+    <button mat-flat-button color="link" mat-dialog-close class="font-monospace fw-bold">
+        <a routerLink="/login" class="text-decoration-none">Login Here</a>
+    </button>
+</div>

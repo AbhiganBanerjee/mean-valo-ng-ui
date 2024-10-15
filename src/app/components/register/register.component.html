@@ -1,0 +1,262 @@
+<body id="backGround" [ngStyle]="{'height':isScreenSize?'820px':'876px'}">
+    <div class="container-fluid justify-content-center align-items-center d-flex" 
+        [ngStyle]="{'height':isScreenSize?'780px':'820px'}"
+    >
+        <div class="row">
+            <div class="col-12">
+                <!-- Here we will add a card that will hold the Register form -->
+                <mat-card [ngStyle]="{'width':isScreenSize?'300px':'450px', 'margin-top':isScreenSize?'100px':'90px'}" >
+                    <mat-card-header>
+                        <!-- Give a registration logo -->
+                        <div mat-card-avatar>
+                            <button mat-mini-fab
+                                [color]="!isTheme?'accent':'primary'"
+                            >
+                                <mat-icon>how_to_reg</mat-icon>
+                            </button>
+                        </div>
+
+                        <!-- Provide a title for the form -->
+                        <mat-card-title 
+                            [ngClass]="{
+                                'fs-5 text-primary':isTheme,
+                                'fs-5 text-danger':!isTheme
+                            }"
+                            style="font-family: monospace; font-weight: bold;"
+                        >
+                            {{isScreenSize?"Register":"Registration Form"}}
+                        </mat-card-title>
+
+                        <!-- Give some space to add the color change button at the top-right -->
+                        <span class="col-3"></span>
+
+                        <!-- Add an mat-icon button to toggle form theme color -->
+                        <button mat-icon-button (click)="handleTheme()"
+                            [color]="isTheme?'accent':'primary'"
+                        >
+                            <mat-icon>{{isTheme?"palette":"format_paint"}}</mat-icon>
+                        </button>
+                    </mat-card-header>
+
+                    <!-- In the Card Body or Content we create the Actual Registration Form -->
+                    <mat-card-content>
+                        <!-- Create the Registration Form Here -->
+                        <form [formGroup]="frmRegister" (submit)="handleRegSubmit(frmRegister.value)">
+                            <!-- Define all the things related to Username field -->
+                            <div>
+                                <!-- First Define Error Messages for Username -->
+                                <dd class="text-danger" *ngIf="Username.invalid && Username.touched || isUsernameExists">
+                                    <!-- Msg for Name Length -->
+                                    <i *ngIf="Username.errors?.['minlength']"
+                                        class="font-monospace fw-bold bi bi-x-circle-fill" 
+                                        [ngStyle]="{'font-size':isScreenSize?'15px':''}"
+                                    >
+                                        Name Too Short!
+                                    </i>
+                                    <!-- Msg for Name required -->
+                                    <i *ngIf="Username.errors?.['required']" 
+                                        class="font-monospace fw-bold bi bi-x-circle-fill"
+                                        [ngStyle]="{'font-size':isScreenSize?'15px':''}"
+                                    >
+                                        Username Required!
+                                    </i>
+                                    <!-- Msg if the Username already exists -->
+                                    <i *ngIf="isUsernameExists" class="bi bi-x-circle-fill text-danger fw-bold font-monospace fs-6">
+                                        {{userNameErrMsg}}
+                                    </i>
+                                </dd>
+
+                                <!-- Define Success message for Username field -->
+                                <dd class="text-success font-monospace fw-bold fs-6" *ngIf="Username.valid && isUsernameNotExists">
+                                    <i class="bi bi-check-circle-fill">&nbsp;{{Username.value}} is Available.</i>
+                                </dd>
+
+                                <!-- Define the Actual Username form field -->
+                                <mat-form-field appearance="outline" class="w-100"
+                                    [color]="!isTheme?'accent':'primary'"
+                                >
+                                    <mat-label class="font-monospace fw-bold">Username</mat-label>
+                                    <input 
+                                        type="text" 
+                                        name="Username"
+                                        formControlName="Username" 
+                                        matInput
+                                        [ngStyle]="{'color':!isTheme?'red':'blue'}"
+                                        class="font-monospace"
+                                        (keyup)="checkUsernameExistance()"
+                                    >
+                                    <mat-icon matSuffix [color]="!isTheme?'accent':'primary'">person</mat-icon>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Define the password formField with all msges -->
+                            <div>
+                                <!-- Provide Error Msgs for password field -->
+                                <dd *ngIf="Password.invalid && Password.touched" class="text-danger font-monospace fw-bold">
+                                    <!-- Msg for required pwd -->
+                                    <i *ngIf="Password.errors?.['required']" class="bi bi-x-circle-fill"> Password Required!</i>
+                                    <!-- Msg for pwd length -->
+                                    <i *ngIf="Password.errors?.['minlength']" class="bi bi-x-circle-fill"> Password too Short!</i>
+                                </dd>
+
+                                <!-- Provide Success Msgs for Password field -->
+                                <dd *ngIf="Password.valid && Password.touched">
+                                    <i class="fw-bold bi bi-check-circle-fill text-success font-monospace fs-6"> Password Ok.</i>
+                                </dd>
+
+                                <!-- Actual Password form field -->
+                                <mat-form-field appearance="outline" [color]="!isTheme?'accent':'primary'" class="w-100">
+                                    <mat-label class="font-monospace fw-bold">Password</mat-label>
+                                    <!-- Based on the hide option toggle the type of text-field -->
+                                    <input 
+                                        [type]="isHide?'text':'password'" 
+                                        matInput
+                                        name="Password"
+                                        formControlName="Password" 
+                                        class="font-monospace"
+                                        [ngStyle]="{'color':!isTheme?'red':'blue'}"
+                                        (change)="matchPassword()"
+                                    >
+                                    <button matSuffix mat-icon-button type="button" (click)="handleEye()"
+                                        [color]="!isTheme?'accent':'primary'"
+                                    >
+                                        <mat-icon>{{!isHide?'visibility':'visibility_off'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Define the retype password field so that password matches -->
+                            <div>
+                                <!-- Define the Error msg when Pwd does not match -->
+                                <dd class="text-danger fw-bold fs-6" *ngIf="isPwdMisMatch">
+                                    <i class="bi bi-x-circle-fill font-monospace"> Password not Matching.</i>
+                                </dd>
+
+                                <!-- Define the Success msg when the Pwd does match -->
+                                <dd class="text-success fw-bold fs-6" *ngIf="isPwdMatched">
+                                    <i class="bi bi-check-circle-fill font-monospace"> Password Matched.</i>
+                                </dd>
+                                
+                                <mat-form-field appearance="outline" [color]="!isTheme?'accent':'primary'" class="w-100">
+                                    <mat-label class="font-monospace fw-bold">Re-type Password</mat-label>
+                                    <!-- Based on the hide option toggle the type of text-field -->
+                                    <input 
+                                        [type]="isHide2?'text':'password'"
+                                        matInput
+                                        name="RePassword"
+                                        formControlName="RePassword" 
+                                        class="font-monospace"
+                                        [ngStyle]="{'color':!isTheme?'red':'blue'}"
+                                        (keyup)="matchPassword()"
+                                    >
+                                    <button matSuffix mat-icon-button type="button" (click)="handleEye2()"
+                                        [color]="!isTheme?'accent':'primary'"
+                                    >
+                                        <mat-icon>{{!isHide2?'visibility':'visibility_off'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Define an Age form-Field -->
+                            <div>
+                                <!-- Define Error msgs for the Age field -->
+                                <dd class="text-danger fw-bold" *ngIf="Age.invalid && Age.touched || isAgeErr">
+                                    <i class="font-monospace bi bi-x-circle-fill" *ngIf="isAgeErr"
+                                        [ngStyle]="{'font-size':isScreenSize?'14px':''}"
+                                    >
+                                         Please enter valid Age!(>=15)
+                                    </i>
+                                </dd>
+
+                                <!-- Define Success Msg for Age -->
+                                <dd class="text-success fs-6" *ngIf="Age.valid && Age.touched || isAgeOk">
+                                    <i *ngIf="isAgeOk" class="bi bi-check-circle-fill font-monospace fw-bold">
+                                         Age Accepted.
+                                    </i>
+                                </dd>
+
+                                <mat-form-field appearance="outline" class="w-100"
+                                    [color]="!isTheme?'accent':'primary'"
+                                >
+                                    <mat-label class="font-monospace fw-bold">Age</mat-label>
+                                    <input 
+                                        type="number" 
+                                        name="Age"
+                                        matInput
+                                        class="font-monospace"
+                                        [ngStyle]="{'color':!isTheme?'red':'blue'}"
+                                        formControlName="Age"
+                                        (keyup)="verifyAge()"
+                                    >
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Define Select Country Field, and load all countries -->
+                            <div>
+                                <!-- Define Error Msg for not selecting country -->
+                                <dd class="font-monospace fw-bold fs-6 text-danger" *ngIf="Country.invalid && Country.touched">
+                                    <i class="bi bi-x-circle-fill"> Country Required!</i>
+                                </dd>
+
+                                <!-- Define success msg on perfect selection of country -->
+                                <dd class="font-monospace fw-bold fs-6 text-success" *ngIf="Country.valid && Country.touched">
+                                    <i class="bi bi-check-circle-fill"> {{Country.value}} Selected.</i>
+                                </dd>
+
+                                <mat-form-field appearance="outline" class="w-100"
+                                    [color]="!isTheme?'accent':'primary'"
+                                >
+                                    <mat-label class="font-monospace fw-bold">Select Country</mat-label>
+                                    <!-- Mat-select triggers the cdk-virtual-scroll -->
+                                    <mat-select formControlName="Country" class="font-monospace" [ngStyle]="{'color':!isTheme?'red':'blue'}">
+                                        <cdk-virtual-scroll-viewport itemSize="48" style="height: 200px;">
+                                            <mat-option 
+                                                *cdkVirtualFor="let country of Countries" 
+                                                [value]="country"
+                                                class="font-monospace"
+                                                [ngStyle]="{'color':!isTheme?'red':'blue'}"
+                                            >
+                                                {{country}}
+                                            </mat-option>
+                                        </cdk-virtual-scroll-viewport>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div> 
+                            
+                            <!-- Define the Register & Clear button in the form -->
+                            <div class="row text-center">
+                                <!-- Register Button, will be disabled untill all are valid -->
+                                <div class="col-6">
+                                    <button  
+                                        [disabled]="frmRegister.invalid || isPwdMisMatch || isUsernameExists || isAgeErr"
+                                        type="submit"
+                                        mat-raised-button
+                                        [color]="!isTheme?'accent':'primary'"
+                                        class="font-monospace fw-bold"
+                                    >
+                                        Register
+                                    </button>
+                                </div>
+
+                                <!-- Form Clear Button -->
+                                <div class="col-6">
+                                    <button 
+                                        type="reset" 
+                                        mat-raised-button
+                                        [color]="!isTheme?'accent':'primary'"
+                                        class="font-monospace fw-bold"
+                                    >
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-center font-monospace text-secondary fw-bold mt-2" [ngStyle]="{'font-size':isScreenSize?'14px':''}">
+                                Already have an account? <a class="text-decoration-none" routerLink="/login">Sign in</a>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</body>

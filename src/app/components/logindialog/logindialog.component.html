@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="text-bg-danger font-monospace fw-bold">
+    {{isScreenSize?'Invalid Login':'Invalid Login Credentials'}}
+</h1>
+<div mat-dialog-content class="text-danger font-monospace fw-bold">
+    {{isScreenSize?'Plsease enter Correct Username & Password!':'Plese do recheck if the Username entered or the Password is Correct or not!'}}
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close color="warn" class="font-monospace fw-bold">
+        <mat-icon>close</mat-icon> CLOSE
+    </button>
+    <button mat-flat-button color="link" mat-dialog-close class="font-monospace fw-bold">
+        <a routerLink="/register" class="text-decoration-none">Register</a>
+    </button>
+</div>

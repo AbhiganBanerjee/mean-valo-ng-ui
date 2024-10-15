@@ -1,14 +1,12 @@
-import { Component, OnInit, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent implements OnInit{
-  title = 'mean-stack-first-app';
+import { Component, OnInit } from '@angular/core';
 
-  //Inject the breakpoint observer service
+@Component({
+  selector: 'app-logindialog',
+  templateUrl: './logindialog.component.html',
+  styleUrls: ['./logindialog.component.css']
+})
+export class LogindialogComponent implements OnInit{
   constructor(private brkPnt : BreakpointObserver){}
 
   //Boolean to track screen size

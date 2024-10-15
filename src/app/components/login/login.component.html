@@ -1,0 +1,95 @@
+<body id="background">
+    <div class="container-fluid d-flex justify-content-center align-items-center" [ngStyle]="{'height':isScreenSize?'600px':'700px'}">
+        <div class="row">
+            <div class="col-12">
+                <!-- WE are creating a Card inside which the Login Form will be created -->
+                <mat-card [ngStyle]="{'width':isScreenSize?'':'450px'}">
+                    <mat-card-header>
+                        <!-- Give a Login logo at the top of the card header and a Title-->
+                        <div mat-card-avatar class="example-header-image">
+                            <button mat-mini-fab [color]="!isTheme?'accent':'primary'"><mat-icon>login</mat-icon></button>
+                        </div>
+                        <mat-card-title [ngClass]="{'text-primary fs-5':isTheme,'text-danger fs-5':!isTheme}" style="font-family: monospace; font-weight: bold;">
+                            <b [ngStyle]="{'font-size':isScreenSize?'18px':''}">{{isScreenSize?"Login Form":"User Login Form"}}</b>
+                        </mat-card-title> 
+                        
+                        <!-- Give some space so that the theme logo goes right side -->
+                        <div [ngClass]="{'col-1':isScreenSize, 'col-3':!isScreenSize}"></div>
+                        
+                        <!-- Add button to change theme color of the form-->
+                        <button mat-icon-button (click)="changeFormTheme()">
+                            <mat-icon [color]="!isTheme?'primary' : 'accent'">{{!isTheme?"palette" : "format_paint"}}</mat-icon>
+                        </button>
+                    </mat-card-header>
+    
+                    <!-- In the card content or body we create the form -->
+                    <mat-card-content>
+                        <!-- Create the Form here, and Link it with the Controller Reactive form -->
+                        <form [formGroup]="frmLogin" (submit)="handleSubmit(frmLogin.value)">
+                            <!-- Define the Username form field -->
+                            <div>
+                                <!-- Define Error messages for Username field -->
+                                <dd class="text-danger font-monospace fs-6 fw-bold" *ngIf="Username.touched && Username.invalid">
+                                    <i class="bi bi-x-circle-fill" *ngIf="Username.errors?.['required']"> Name Required!</i>
+                                    <i class="bi bi-x-circle-fill" *ngIf="Username.errors?.['minlength']">{{isScreenSize?' Too short name!':' Name Too short min 4 chars!!'}}</i>
+                                </dd>
+                                <!-- Define Success message for Username field -->
+                                <dd class="text-success font-monospace fw-bold fs-6" *ngIf="Username.valid">
+                                    <i class="bi bi-check-circle-fill">&nbsp;Username Ok.</i>
+                                </dd> 
+                                <!-- Define Username field -->
+                                <mat-form-field appearance="outline" [color]="!isTheme?'accent':'primary'" class="font-monospace w-100">
+                                    <mat-label class="font-monospace">Username</mat-label>
+                                    <input [ngStyle]="{'color':!isTheme?'red':'blue'}" formControlName="Username" name="Username" type="text" class="font-monospace" matInput>
+                                    <mat-icon matSuffix [color]="!isTheme?'accent':'primary'">person</mat-icon>
+                                </mat-form-field>
+                            </div>
+                            
+                             <!-- Define the Username form field -->
+                            <div>
+                                <!-- Define error and success messages for Password validation -->
+                                <dd class="text-danger font-monospace fw-bold fs-6" *ngIf="Password.touched && Password.invalid">
+                                    <i class="bi bi-x-circle-fill" *ngIf="Password.errors?.['required']"> Password Required!</i>
+                                    <i class="bi bi-x-circle-fill" *ngIf="Password.errors?.['minlength']">{{isScreenSize?' Password too short!':' Password must contain min 4 chars!'}}</i>
+                                </dd> 
+                                <dd class="text-success font-monospace fw-bold fs-6" *ngIf="Password.valid">
+                                    <span class="bi bi-check-circle-fill"></span>&nbsp;<i>Perfect Password.</i>
+                                </dd>
+                                <!-- Define the password field -->
+                                <mat-form-field appearance="outline" [color]="!isTheme?'accent':'primary'" class="font-monospace w-100">        
+                                    <mat-label class="font-monospace">Password</mat-label>
+                                    <input [ngStyle]="{'color':!isTheme?'red':'blue'}" formControlName="Password" name="Password" matInput [type]="hide ? 'password' : 'text'">
+                                    <button type="button" mat-icon-button matSuffix (click)="showEye()">
+                                      <mat-icon [color]="!isTheme?'accent':'primary'">{{!hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button> 
+                                </mat-form-field>
+                            </div>
+                            
+                            <!-- Define 2 buttons to login and clear the form -->
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <!-- Disable the button until and unless the form is valid -->
+                                    <button [disabled]="Username.invalid || Password.invalid" type="submit" mat-raised-button [color]="!isTheme?'accent':'primary'" class="font-monospace fw-bold">
+                                        Login
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="reset" mat-raised-button [color]="!isTheme?'accent':'primary'" class="font-monospace fw-bold">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Give a link to Register Component -->
+                            <div class="text-center font-monospace fw-bold text-secondary mt-2" 
+                                [ngStyle]="{'font-size':isScreenSize?'15px':''}"
+                            >
+                                Don't have an account? 
+                                <a class="text-decoration-none" routerLink="/register">Sign up</a>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</body>

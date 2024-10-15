@@ -1,0 +1,307 @@
+<mat-grid-list [cols]="isScreenSize?1:1" [rowHeight]="isScreenSize?'600px':'2:1'" [gutterSize]="isScreenSize?'20px':'30px'">
+    <!-- HOME TEASER -->
+    <mat-grid-tile [ngClass]="{'firstSlideSmall':isScreenSize, 'firstSlideBig':!isScreenSize}">
+        <div *ngIf="isScreenSize" class="font-monospace fw-bolder text-white">
+            <p style="font-size: 14px;">A 5v5 character-based tactical shooter</p><br/>
+            <div class="text-center mt-1">
+                <a><img src="https://fontmeme.com/permalink/240820/a267f887ec96d39c43e68e823abf58de.png" alt="valorant-font" border="0"></a>
+            </div><br/>
+            <div class="text-center">
+                <a href="https://www.vlr.gg/">
+                    <button mat-raised-button color="warn" class="forFreeBtn">
+                        PLAY FOR FREE
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="!isScreenSize" class="font-monospace fw-bolder fs-5 text-white">
+            A 5v5 character-based tactical shooter<br/>
+            <div class="text-center mt-5">
+                <a><img src="https://fontmeme.com/permalink/240820/8bc96f37751873861618111a9c6db91f.png" alt="valorant-font" border="0"></a>
+            </div><br/>
+            <div class="text-center">
+                <a href="https://www.vlr.gg/">
+                    <button mat-raised-button color="warn" class="forFreeBtn">
+                        PLAY FOR FREE
+                    </button>
+                </a>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+
+    <!-- Agent Teaser -->
+    <mat-grid-tile id="agentTeaser">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Image for Big screen size -->
+                <div class="col-12 col-lg-6" *ngIf="!isScreenSize">
+                    <div [ngClass]="{'container-xs':isScreenSize, 'container-lg':!isScreenSize}">
+                        <img id="teaserImg" class="card-img-top" src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1d62a3751be9d7abfce84da8ca89be7d79f07fed-1232x1232.png?auto=format&fit=fill&q=80&w=845" alt="">
+                    </div>
+                </div>
+
+                <!-- We are defining the Your Agents Section in a CARD for Big Card-->
+                <div class="col-12 col-lg-6 mb-5" [ngStyle]="{'margin-top':isScreenSize?'0px':'160px'}" *ngIf="!isScreenSize">
+                    <mat-card style="border: 2px solid orangered; margin-left: 20px; background-color: orangered;">
+                        <!-- This is the Card header that will define the "YOUR AGENTS" tag -->
+                        <mat-card-header>
+                            <div class="card-header text-center">
+                                <h1 class="font-monospace fw-bold text-white" 
+                                    [ngStyle]="{'font-size':isScreenSize?'35px':'105px'}"
+                                >
+                                    YOUR AGENTS
+                                </h1>
+                            </div>
+                        </mat-card-header>
+
+                        <!-- This is the Card Content That will define the Text in the Card Body -->
+                        <mat-card-content>
+                            <div class="card-body p-2 mt-4 mb-3 fs-5 font-monospace fw-bold text-light">
+                                CREATIVITY IS YOUR GREATEST WEAPON.
+                            </div>
+                            <div class="font-monospace p-2 fs-6 text-light" style="text-align: left;">
+                                More than guns and bullets, you will choose an Agent armed with adaptive, swift, and lethal abilities that create opportunities to let your gunplay shine. No two Agents play alike, just as no two highlight reels will look the same.
+                            </div>
+                        </mat-card-content>
+
+                        <!-- This is the Card footer that will contain one button of Navigating to Agents route -->
+                        <mat-card-footer class="mt-4">
+                            <mat-card-actions class="text-start">   
+                                <!-- Navigate to Agents route -->
+                                <a routerLink="/agents" class="text-decoration-none">
+                                    <button (mouseover)="changeBtnColor()"  (mouseout)="changeBtnColor()"
+                                        [className]="isHover?'btn btn-light font-monospace fw-bold fs-5 p-3':'btn btn-dark font-monospace fw-bold fs-5 p-3'"
+                                        style="margin-left: 15px;"
+                                    >
+                                        VIEW ALL AGENTS
+                                    </button>
+                                </a>
+                            </mat-card-actions>
+                        </mat-card-footer>
+                    </mat-card>
+                </div>
+
+                <!-- Above the agent image Agent Detail Card will be displayed for small screen-->
+                <div class="col-12 col-lg-6" *ngIf="isScreenSize">
+                    <div class="card" style="background-color: orangered; ">
+                        <div class="card-header">
+                            <h1 class="text-center font-monospace fw-bold text-light" style="font-size: 30px;">
+                                YOUR AGENTS
+                            </h1>
+                        </div>
+                        <div class="card-body p-2 font-monospace fw-bold text-light text-start" style="font-size: 14px;">
+                            CREATIVITY IS YOUR GREATEST WEAPON.
+                            <div class="font-monospace text-light mt-2" style="text-align: left; font-size: 12px;">
+                                More than guns and bullets, you will choose an Agent armed with adaptive, swift, and lethal abilities that create opportunities to let your gunplay shine. No two Agents play alike, just as no two highlight reels will look the same.
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <!-- Navigate to agents page by View Agents button -->
+                            <a routerLink="/agents">
+                                <button (mouseover)="changeBtnColor()" (mouseout)="changeBtnColor()" 
+                                    [className]="!isHover?'btn btn-dark font-monospace fw-bold fs-6 p-2 btn-sm':'btn btn-light font-monospace fw-bold fs-6 p-2 btn-sm'"
+                                >
+                                    VIEW ALL AGENTS
+                                </button>
+                            </a>
+                            <!-- For Small screens agents image will be displayed below -->
+                            <div class="col-12 col-lg-6" *ngIf="isScreenSize">
+                                <div [ngClass]="{'container-xs':isScreenSize, 'container-lg':!isScreenSize}">
+                                    <img id="teaserImg" class="card-img-bottom mt-3" src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1d62a3751be9d7abfce84da8ca89be7d79f07fed-1232x1232.png?auto=format&fit=fill&q=80&w=845" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+
+    <!-- Maps Teaser -->
+    <mat-grid-tile id="mapTeaser">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- We are defining the Your Maps Section in a CARD for Big Card-->
+                <div class="col-12 col-lg-6 mb-5" [ngStyle]="{'margin-top':isScreenSize?'0px':'160px'}" *ngIf="!isScreenSize">
+                    <mat-card style="margin-left: 20px; background-color: #ece8e3;">
+                        <!-- This is the Card header that will define the "YOUR MAPS" tag -->
+                        <mat-card-header>
+                            <div class="card-header text-center">
+                                <h1 class="font-monospace fw-bold text-dark" 
+                                    [ngStyle]="{'font-size':isScreenSize?'35px':'105px'}"
+                                >
+                                    YOUR MAPS
+                                </h1>
+                            </div>
+                        </mat-card-header>
+
+                        <!-- This is the Card Content That will define the Text in the Card Body -->
+                        <mat-card-content>
+                            <div class="card-body p-1 mt-4 mb-1 fs-5 font-monospace fw-bold text-dark">
+                                FIGHT AROUND THE WORLD
+                            </div>
+                            <div class="font-monospace p-1 fs-6 text-dark" style="text-align: left;">
+                                Each map is a playground to showcase your creative thinking. Purpose-built for team strategies, spectacular plays, and clutch moments. Make the play others will imitate for years to come..
+                            </div>
+                        </mat-card-content>
+
+                        <!-- This is the Card footer that will contain one button of Navigating to Maps route -->
+                        <mat-card-footer class="mt-4">
+                            <mat-card-actions class="text-start">   
+                                <!-- Navigate to Maps route -->
+                                <a routerLink="/maps" class="text-decoration-none">
+                                    <button (mouseover)="changeBtnColor()"  (mouseout)="changeBtnColor()"
+                                        [className]="isHover?'btn btn-dark font-monospace fw-bold fs-5 p-3':'btn btn-danger font-monospace fw-bold fs-5 p-3'"
+                                        style="margin-left: 15px;"
+                                    >
+                                        VIEW ALL MAPS
+                                    </button>
+                                </a>
+                            </mat-card-actions>
+                        </mat-card-footer>
+                    </mat-card>
+                </div>
+                <!-- Map Image for Big screen size -->
+                <div class="col-12 col-lg-6" *ngIf="!isScreenSize">
+                    <div [ngClass]="{'container-xs':isScreenSize, 'container-lg':!isScreenSize}">
+                        <img id="mapImg" class="card-img-top" src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/65c45804e00ee97977b6eef06da370543968d161-1232x1232.png?auto=format&fit=fill&q=80&w=845" alt="">
+                    </div>
+                </div>
+
+                <!-- Above the Map image Map Detail Card will be displayed for small screen-->
+                <div class="col-12 col-lg-6" *ngIf="isScreenSize">
+                    <div class="card" style="background-color: #ece8e3;">
+                        <div class="card-header">
+                            <h1 class="text-center font-monospace fw-bold text-dark" style="font-size: 30px;">
+                                YOUR MAPS
+                            </h1>
+                        </div>
+                        <div class="card-body p-2 font-monospace fw-bold text-light text-dark" style="font-size: 14px;">
+                            FIGHT AROUND THE WORLD
+                            <div class="font-monospace text-dark mt-2" style="text-align: left; font-size: 12px;">
+                                Each map is a playground to showcase your creative thinking. Purpose-built for team strategies, spectacular plays, and clutch moments. Make the play others will imitate for years to come..
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <!-- Navigate to maps page by View Agents button -->
+                            <a routerLink="/maps">
+                                <button (mouseover)="changeBtnColor()" (mouseout)="changeBtnColor()" 
+                                    [className]="isHover?'btn btn-dark font-monospace fw-bold fs-6 p-2 btn-sm':'btn btn-danger font-monospace fw-bold fs-6 p-2 btn-sm'"
+                                >
+                                    VIEW ALL MAPS
+                                </button>
+                            </a>
+                            <!-- For Small screens maps image will be displayed below -->
+                            <div class="col-12 col-lg-6" *ngIf="isScreenSize">
+                                <div [ngClass]="{'container-xs':isScreenSize, 'container-lg':!isScreenSize}">
+                                    <img id="mapImg" class="card-img-bottom mt-3" src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/65c45804e00ee97977b6eef06da370543968d161-1232x1232.png?auto=format&fit=fill&q=80&w=850" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-grid-tile>
+
+
+    <!-- Arsenals Teaser -->
+    <mat-grid-tile id="arsenalTeaser">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Arsenal Image for Big screen size -->
+                <div class="col-12 col-lg-6" *ngIf="!isScreenSize">
+                    <div [ngClass]="{'container-xs':isScreenSize, 'container-lg':!isScreenSize}">
+                        <img id="teaserImg" class="card-img-top" src="https://images.ctfassets.net/2bxzdgjogryj/5DPvDorumxhrNWReO5A6ls/46c2bdb39fbbe14795922b61bfc12168/Top_5_Valorant_Guns_To_Own_Your_Enemies" alt="">
+                    </div>
+                </div>
+
+                <!-- We are defining the Your Agents Section in a CARD for Big Card-->
+                <div class="col-12 col-lg-6 mb-5" [ngStyle]="{'margin-top':isScreenSize?'0px':'100px'}" *ngIf="!isScreenSize">
+                    <mat-card style="border: 2px solid orangered; margin-left: 20px; background-color: orangered;">
+                        <!-- This is the Card header that will define the "YOUR AGENTS" tag -->
+                        <mat-card-header>
+                            <div class="card-header text-center">
+                                <h1 class="font-monospace fw-bold text-white" 
+                                    [ngStyle]="{'font-size':isScreenSize?'35px':'100px'}"
+                                >
+                                    YOUR WEAPONS
+                                </h1>
+                            </div>
+                        </mat-card-header>
+
+                        <!-- This is the Card Content That will define the Text in the Card Body -->
+                        <mat-card-content>
+                            <div class="card-body p-2 mt-4 mb-3 fs-5 font-monospace fw-bold text-light">
+                                CHOOSE WISELY THE WEAPON WITH WHICH YOU ARE COMFORTABLE.
+                            </div>
+                            <div class="font-monospace p-2 fs-6 text-light" style="text-align: left;">
+                                Primary Weaponse are the best but with more cost and more recoil. SMGs are also cheaper and have 
+                                a higher Fire-Rate. Choose ODIN to wall-bang and span anywhere. And If You love to snipe then use either
+                                the Operator or Marshal.
+                            </div>
+                        </mat-card-content>
+
+                        <!-- This is the Card footer that will contain one button of Navigating to Agents route -->
+                        <mat-card-footer class="mt-4">
+                            <mat-card-actions class="text-start">   
+                                <!-- Navigate to Agents route -->
+                                <a routerLink="/arsenal" class="text-decoration-none">
+                                    <button (mouseover)="changeBtnColor()"  (mouseout)="changeBtnColor()"
+                                        [className]="isHover?'btn btn-light font-monospace fw-bold fs-5 p-3':'btn btn-dark font-monospace fw-bold fs-5 p-3'"
+                                        style="margin-left: 15px;"
+                                    >
+                                        VIEW ALL WEAPONS
+                                    </button>
+                                </a>
+                            </mat-card-actions>
+                        </mat-card-footer>
+                    </mat-card>
+                </div>
+
+                <!-- Above the agent image Agent Detail Card will be displayed for small screen-->
+                <div class="col-12 col-lg-6" *ngIf="isScreenSize">
+                    <div class="card" style="background-color: orangered; ">
+                        <div class="card-header">
+                            <h1 class="text-center font-monospace fw-bold text-light" style="font-size: 30px;">
+                                YOUR WEAPONS
+                            </h1>
+                        </div>
+                        <div class="card-body p-2 font-monospace fw-bold text-light text-start" style="font-size: 14px;">
+                            CHOOSE WISELY THE WEAPON WITH WHICH YOU ARE COMFORTABLE.
+                            <div class="font-monospace text-light mt-2" style="text-align: left; font-size: 12px;">
+                                Primary Weaponse are the best but with more cost and more recoil. SMGs are also cheaper and have 
+                                a higher Fire-Rate. Choose ODIN to wall-bang and span anywhere. And If You love to snipe then use either
+                                the Operator or Marshal.
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <!-- Navigate to agents page by View Agents button -->
+                            <a routerLink="/arsenal">
+                                <button (mouseover)="changeBtnColor()" (mouseout)="changeBtnColor()" 
+                                    [className]="!isHover?'btn btn-dark font-monospace fw-bold fs-6 p-2 btn-sm':'btn btn-light font-monospace fw-bold fs-6 p-2 btn-sm'"
+                                >
+                                    VIEW ALL WEAPONS
+                                </button>
+                            </a>
+                            <!-- For Small screens agents image will be displayed below -->
+                            <div class="col-12 col-lg-6" *ngIf="isScreenSize">
+                                <div [ngClass]="{'container-xs':isScreenSize, 'container-lg':!isScreenSize}">
+                                    <img id="teaserImg" class="card-img-bottom mt-5" src="https://images.ctfassets.net/2bxzdgjogryj/5DPvDorumxhrNWReO5A6ls/46c2bdb39fbbe14795922b61bfc12168/Top_5_Valorant_Guns_To_Own_Your_Enemies" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list> 
+
+<!-- Back to Top Button, will be visible based on the showBackToTop boolean-->
+<button mat-mini-fab class="back-to-top" color="primary" (click)="backToTopClick()" *ngIf="showBackToTop">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+</button>

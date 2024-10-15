@@ -1,0 +1,80 @@
+<!-- This is just another nav-bar to showcase agents categories or types -->
+<header class="text-bg-dark text-danger" style="margin-top: 70px;">        
+    <mat-toolbar class="text-bg-dark row">
+        <!-- This text will also come only when Screen is Large -->
+        <h2 *ngIf="!isScreenSize" class="col-lg-1 font-monospace fw-bold" style="margin-left: 20px;">
+            <img src="https://fontmeme.com/permalink/240824/bf4331c1ac1cb10e96ba4490c1ad7805.png" alt="">
+        </h2>
+        
+        <!-- This gap only be there if The screensize is large 
+        Here we have configured the Logout option to del cookie-->
+        <span *ngIf="!isScreenSize" class="col-lg-7 text-center font-monospace fw-bold">
+            <span class="bi bi-person-fill">
+                User : {{cookieName}} 
+                &nbsp;&nbsp;
+                <button (click)="logOutClick()" class="font-monospace fw-bold btn btn-outline-danger btn-sm">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </span> 
+        </span>
+        
+        <!-- This span contains the agent role options -->
+        <span [ngStyle]="{'margin-left':isScreenSize?'-14px':'0px'}" class="col-12 col-lg-1">
+            <!-- Iterate through the AgentTypes array, and for each type create a button -->
+            <button mat-button [ngStyle]="{'margin-left':isScreenSize?'0px':'20px'}" *ngFor="let item of AgentTypes" (click)="NavClick(item.role)" color="warn">
+                <img [ngStyle]="{'height':isScreenSize?'19px':'30px', 'width':isScreenSize?'19px':'30px'}" [src]="item.image" alt="Agent_Role_Logo">   
+            </button>
+        </span> 
+    </mat-toolbar>
+</header>
+
+<!-- Here we are showcasing all the agents in the form of Cards -->
+<div class="container-fluid bg-black"> 
+    
+    <!-- This is just an Agent Text that will be displayed in the small screens only -->
+    <p *ngIf="isScreenSize" class="bg-black mt-3">
+        <img src="https://fontmeme.com/permalink/240824/bf4331c1ac1cb10e96ba4490c1ad7805.png" alt="">
+    </p>
+    
+    <!-- In this div we will define Logout option for Mobile Screen -->
+    <div *ngIf="isScreenSize" class="mt-2 text-danger font-monospace fw-bold fs-4">
+       <span class="bi bi-person-fill"> {{cookieName}}     
+            <button (click)="logOutClick()"  class="fs-6 btn btn-outline-danger btn-sm">
+                <i class="bi-box-arrow-right"></i> Logout
+            </button><br/>
+        </span> 
+    </div>
+
+    <!-- In the row and col form it is displayed for media responsive ness -->
+    <div class="row" [ngStyle]="{'margin-top':isScreenSize?'70px':'0px'}">
+        <!-- For each agents this div should repeat -->
+        <div *ngFor="let agent of Agents" class="col-12 col-md-6 col-lg-3">
+            <!-- Add cards -->  
+            <mat-card id="cards" class="bg-black border border-2 text-white mt-3 mb-3">
+                <img mat-card-image [src]="agent.image" style="aspect-ratio: 3/2; object-fit: contain;" alt="Agent_Pic">
+                <mat-card-header style="height: 150px;">
+                    <mat-card-title class="font-monospace fw-bold text-danger fs-3">
+                        {{agent.name | uppercase}}&nbsp;<img style="aspect-ratio: 3/2; object-fit: contain;" [src]="agent.roleImg" alt="Agent_Role" height="25">
+                    </mat-card-title>
+                    <mat-card-subtitle class="text-white font-monospace fw-bold fs-5">
+                        <dl class="mt-2">
+                            <b>Role <b class="text-danger">//</b></b>&nbsp;<b>{{agent.role | titlecase}}</b>
+                            <dt class="mt-3">Abilities <b class="text-danger">//</b></dt>
+                            <dd class="mt-2 justify-content-center">
+                                <img id="abilityLogo" *ngFor="let img of agent.abilities" [src]="img.abilityImg" [height]="isScreenSize?25:37">
+                            </dd>
+                        </dl>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions class="justify-content-between align-items-center d-flex">
+                    
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<!-- Back to Top Button, will be visible based on the showBackToTop boolean-->
+<button mat-mini-fab class="back-to-top" color="accent" (click)="backToTopClick()" *ngIf="showBackToTop">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+</button>

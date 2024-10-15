@@ -1,0 +1,17 @@
+<span class="p-2">
+    <i class="font-monospace fw-bold bi bi-check-circle-fill fs-6" style="color: green;"> Login Successful.
+        <!-- it is a gap that only will be rendered in big screen -->
+        <span *ngIf="!isScreenSize" style="margin-right: 40px;"></span>
+       
+        <!-- Button to close the snackbar for bigscreen -->
+        <button *ngIf="!isScreenSize" mat-stroked-button color="warn" matSnackBarAction (click)="snackBarRef.dismissWithAction()">
+            <span class="bi bi-x-square-fill"></span>
+        </button>
+
+        <!-- Button to close the snackbar for small screen-->
+        <button style="margin-left: 20px;" class="btn btn-outline-danger btn-sm" *ngIf="isScreenSize" color="warn" matSnackBarAction (click)="snackBarRef.dismissWithAction()">
+            <span class="bi bi-x-square-fill"></span>
+        </button>
+    </i>
+    <span ></span>
+</span>

@@ -1,0 +1,83 @@
+/* Give a space between the valorant logo and the navs */
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+/* Style the Valorant Logo on hover and normal */
+#valorantLogo{
+    color: white;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: xx-large;
+}
+#valorantLogo:hover{
+    color: #eb0029;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: xx-large;
+}
+
+#top-menu-item{
+    color: white !important;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: x-large;
+    margin-left: 20px;
+    padding: 10px;
+}
+#top-menu-item:hover{
+    border: 2px solid #eb0029;
+    border-radius: 15px 15px 15px 15px;
+    color: #eb0029 !important;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: x-large;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+#playBtn{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 17px;
+    color: black;
+    border-radius: 12px 12px 12px 12px;
+}
+
+/* #menuTitle {
+    font-size: medium;
+    margin-right: 20px;
+    font-family: Nevan;
+} */
+
+.mat-toolbar {
+    height: 74px;
+}
+
+#side-menu-item {
+    color: white !important;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: large;
+    margin-top: 20px;
+    padding: 10px;
+}
+#side-menu-item:hover{
+    border: 2px solid #eb0029;
+    border-radius: 15px 15px 15px 15px;
+    color: #eb0029 !important;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: large;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.main-content {
+    margin: 20px;
+}
+
+/* To block the contents, below the sidenav or drawer when it is opened */
+.mat-sidenav-container {
+    z-index: 1400; /* Ensure it's higher than the button */
+}

@@ -1,0 +1,54 @@
+<mat-toolbar style="position: fixed; top: 0; width: 100%; z-index: 1000;" class="bg-black">
+    <!-- This is the hamburger button that will come when ScreenSize is of Mobile screen -->
+    <button color="warn" *ngIf="isSmall || isScreenSize" mat-icon-button (click)="sidenav.toggle()" id="menuIcon">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- This is a Valorant Icon On which click Home will come only and on hover color changes -->
+    <a routerLink="" mat-button id="valorantLogo">
+        <!-- This is the valorant logo -->
+        <img [height]="isScreenSize?30:50" (mouseover)="HoverImage()" (mouseout)="OutImage()" [src]="imgSrc">
+        
+        <!-- This is the valorant text that will also change hover color-->
+        <img (mouseover)="HoverImage()" (mouseout)="OutImage()" [src]="textSrc" alt="valorant-font" border="0">
+    </a>
+    
+    <!-- This is some space is given in between Valorant logo and the navigation routes -->
+    <span class="example-spacer"></span>
+
+    <!-- These are our actual routes or navigations -->
+    <div *ngIf="!isSmall && !isScreenSize">
+        <!-- Iterating the Navs array -->
+        <a mat-button *ngFor="let nav of Navs" [routerLink]="nav.path" id="top-menu-item">
+            <mat-icon>{{nav.icon}}</mat-icon>{{nav.path | uppercase}}
+        </a>
+
+        <!-- Putting the Sign in button -->
+        <span style="margin-left: 100px;">
+            <a routerLink="/login"><button mat-raised-button color="warn" id="playBtn"><mat-icon>login</mat-icon> SIGN IN</button></a>
+        </span>
+    </div>
+</mat-toolbar>
+
+<!-- THis is the drawer or Side-Nav component that will open only in Mobile upon clicking the hamburger -->
+<mat-sidenav-container>
+    <mat-sidenav style="width: 160px; z-index: 1300;" class="bg-black text-white" #sidenav [fixedInViewport]="true" [fixedTopGap]="60" mode="over">
+        <div class="d-flex flex-column">
+            <!-- Iterate through the navs to add the side nav options -->
+            <div *ngFor="let nav of Navs">
+                <a (click)="sidenav.close()" id="side-menu-item" mat-button [routerLink]="nav.path"><mat-icon>{{nav.icon}}</mat-icon>
+                    {{nav.path | uppercase}}
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-column" style="height:300px;">
+
+        </div>
+        <!-- Sign in button in side nav -->
+        <div class="d-flex flex-column text-center">
+            <a routerLink="/login">
+                <button (click)="sidenav.close()" mat-raised-button color="warn" id="playBtn"><mat-icon>login</mat-icon> SIGN IN</button>
+            </a>
+        </div>
+    </mat-sidenav>
+</mat-sidenav-container>

@@ -1,0 +1,112 @@
+<body id="backGround">
+    <!-- Define Pick Gun Type Radio Buttons for the Large Screen -->
+    <header *ngIf="!isScreenSize" style="margin-top: 76px; margin-left: 110px;">
+        <h2 class="font-monospace fw-bold m-2 p-2" style="font-size: 50px; ">
+            ARSENAL 
+            <span class="font-monospace fw-bold fs-4">
+                <!-- Show the username -->
+                <i class="bi bi-person-circle"></i> {{userName}}
+
+                <!-- Define cookie delete button -->
+                <button (click)="logOutClick()" class="btn btn-outline-danger btn-sm bi bi-box-arrow-right font-monospace fw-bold">
+                    Logout
+                </button>
+            </span>
+        </h2>
+        <div class="container-fluid font-monospace fw-bold mt-3 row">
+            <label class="fs-5 mb-2">Pick The Type of Arsenal:</label>      
+            <div class="btn-group btn-group-md" role="group">
+                <!-- Iterate through the types array and define radio for each type -->
+                <!-- Combine the input and label in one *ngFor loop -->
+                <ng-container *ngFor="let item of types">
+                    <input 
+                        (change)="onTypeChange(item)" 
+                        type="radio" 
+                        class="btn-check" 
+                        name="btnradio" 
+                        [id]="item" 
+                        [value]="item" 
+                    >
+                    <!-- Use 'label' with proper 'for' binding, apply 'active' when the item is selected -->
+                    <label 
+                        class="btn btn-outline-danger" 
+                        [attr.for]="item"
+                    >
+                    {{ item | uppercase }}
+                    </label>
+                </ng-container>
+            </div>
+        </div>
+    </header>
+
+    <!-- Define Pick Gun Type Radio Buttons for the Small Screen -->
+    <header *ngIf="isScreenSize" style="margin-top: 76px;">
+        <h2 class="font-monospace fw-bold m-2 p-2" style="font-size: 50px; ">
+            ARSENAL <br/><br/>
+            <span class="font-monospace fw-bold fs-4">
+                <!-- Show the username -->
+                <i class="bi bi-person-circle"></i> {{userName}}
+
+                <!-- Define cookie delete button -->
+                <button (click)="logOutClick()" class="btn btn-outline-danger btn-sm bi bi-box-arrow-right font-monospace fw-bold">
+                    Logout
+                </button>
+            </span>
+        </h2>
+        <div class="container-fluid font-monospace fw-bold mt-3 row">
+            <label class="fs-6 mb-2">Pick The Type of Arsenal:</label>      
+            <div class="btn-group d-flex flex-wrap btn-group-sm p-2" role="group" style="margin-left: 20px;">
+                <!-- Iterate through the types array and define radio for each type -->
+                <!-- Combine the input and label in one *ngFor loop -->
+                <ng-container *ngFor="let item of types">
+                    <input 
+                        (change)="onTypeChange(item)" 
+                        type="radio" 
+                        class="btn-check" 
+                        name="btnradio" 
+                        [id]="item" 
+                        [value]="item" 
+                    >
+                    <!-- Use 'label' with proper 'for' binding, apply 'active' when the item is selected -->
+                    <label 
+                        class="btn btn-outline-danger w-50" 
+                        [attr.for]="item"
+                        style="flex: 0 0 48%;" 
+                    >
+                    {{ item | uppercase }}
+                    </label>
+                </ng-container>
+            </div>
+        </div>
+    </header>
+
+    <!-- Create the Container in side which we will create row and columns of repeating arsenal cards -->
+    <div class="container" id="backGround">
+        <!-- Create the ROW -->
+        <div class="row" style="margin-top: 50px;">
+            <!-- Repeat the Responsive Bootstrap columns -->
+            <div class="col-12 col-lg-4" *ngFor="let item of Guns">
+                <!-- Create one card for each gun -->
+                <mat-card class="m-2 p-2" style="background-color: #ece8e3;">
+                    <img mat-card-image style="aspect-ratio: 3/2; object-fit: contain;background-color: #e8dccc;" [src]="item.image">
+                    <mat-card-header>
+                        <mat-card-title class="fw-bold font-monospace">{{item.name | uppercase}}.</mat-card-title>
+                        <mat-card-subtitle class="mt-2 fw-bold fs-6 text-dark font-monospace">
+                            TYPES // {{item.type | uppercase}}
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="mt-2">
+                        <p class="font-monospace fs-6">
+                            {{item.desc}}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button, will be visible based on the showBackToTop boolean-->
+    <button mat-mini-fab class="back-to-top" color="accent" (click)="backToTopClick()" *ngIf="showBackToTop">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+    </button>
+</body>
