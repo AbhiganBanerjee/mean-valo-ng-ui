@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { GuarddialogComponent } from '../components/guarddialog/guarddialog.component';
@@ -8,7 +8,7 @@ import { GuarddialogComponent } from '../components/guarddialog/guarddialog.comp
 @Injectable({
   providedIn: 'root'
 })
-export class ArsenalguardGuard implements CanActivate {
+export class ArsenalguardGuard  {
   //Inject the CookieService & Router & matdialog to open dialog
   constructor(private cookie:CookieService, private router:Router, private dialog:MatDialog){}
 

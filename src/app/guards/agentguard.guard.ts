@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { GuarddialogComponent } from '../components/guarddialog/guarddialog.component';
@@ -8,7 +8,7 @@ import { GuarddialogComponent } from '../components/guarddialog/guarddialog.comp
 @Injectable({
   providedIn: 'root'
 })
-export class AgentguardGuard implements CanActivate {
+export class AgentguardGuard  {
   //Inject the cookieService to check cookies
   //Inject the Router module to navigate dynamically among pages
   constructor(private cookie:CookieService, private router:Router, private dialog:MatDialog){}

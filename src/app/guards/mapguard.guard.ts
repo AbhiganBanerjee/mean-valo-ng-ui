@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { GuarddialogComponent } from '../components/guarddialog/guarddialog.component';
@@ -8,7 +8,7 @@ import { GuarddialogComponent } from '../components/guarddialog/guarddialog.comp
 @Injectable({
   providedIn: 'root'
 })
-export class MapguardGuard implements CanActivate {
+export class MapguardGuard  {
   //Inject the CookieService, Dialog, Router Services
   constructor(private cookie:CookieService, private dialog:MatDialog, private router:Router){}
 
