@@ -50,7 +50,7 @@ export class AgentsComponent implements OnInit{
   //Selecting only Particular Type of Agents
   public NavClick(value:string){
     //Fetch only the particular type agents based on the path param
-    this.api.GetAgents(`https://mean-valorant-api.onrender.com/${value}`).subscribe((data)=>{
+    this.api.GetAgents(`https://mean-valorant-api.onrender.com/getAllAgents/${value}`).subscribe((data)=>{
       this.Agents = data;
     })
   }
