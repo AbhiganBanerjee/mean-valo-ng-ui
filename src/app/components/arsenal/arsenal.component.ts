@@ -46,7 +46,7 @@ export class ArsenalComponent implements OnInit{
 
   //OnGun Type change make API call by passing the type as Path Param
   public onTypeChange(gunType:any):void{
-    this.api.GetAllArsenal(`https://mean-valorant-api.vercel.app/${gunType}`).subscribe((data)=>{
+    this.api.GetAllArsenal(`https://mean-valorant-api.vercel.app/getAllArsenal/${gunType}`).subscribe((data)=>{
       this.Guns = data;
     });
   }
