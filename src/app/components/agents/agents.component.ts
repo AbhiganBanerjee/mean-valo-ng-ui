@@ -34,12 +34,12 @@ export class AgentsComponent implements OnInit{
     });
 
     //Load all the agents 
-    this.api.GetAgents('https://mean-valorant-api.onrender.com/getAllAgents/all').subscribe((data)=>{
+    this.api.GetAgents('https://mean-valorant-api.vercel.app/getAllAgents/all').subscribe((data)=>{
       this.Agents = data;
     })
 
     //Fetch all the Agent types (sentinel, initiator,...etc) from Node-Express REST-Service
-    this.api.GetAgentsTypes('https://mean-valorant-api.onrender.com/getAllTypes').subscribe((data)=>{
+    this.api.GetAgentsTypes('https://mean-valorant-api.vercel.app/getAllTypes').subscribe((data)=>{
       this.AgentTypes = data;
     })
 
@@ -50,7 +50,7 @@ export class AgentsComponent implements OnInit{
   //Selecting only Particular Type of Agents
   public NavClick(value:string){
     //Fetch only the particular type agents based on the path param
-    this.api.GetAgents(`https://mean-valorant-api.onrender.com/getAllAgents/${value}`).subscribe((data)=>{
+    this.api.GetAgents(`https://mean-valorant-api.vercel.app/getAllAgents/${value}`).subscribe((data)=>{
       this.Agents = data;
     })
   }

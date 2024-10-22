@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit{
     })
 
     //Get all the users from api 
-    this.api.GetAllUsers('https://mean-valorant-api.onrender.com/getAllUsers').subscribe((data)=>{
+    this.api.GetAllUsers('https://mean-valorant-api.vercel.app/getAllUsers').subscribe((data)=>{
       this.Users = data;
     }) 
   }

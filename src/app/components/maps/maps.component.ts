@@ -33,7 +33,7 @@ export class MapsComponent implements OnInit{
     });
 
     //fetch all the maps from the backend api
-    this.api.LoadMaps('https://mean-valorant-api.onrender.com/getAllMaps/all').subscribe((data)=>{
+    this.api.LoadMaps('https://mean-valorant-api.vercel.app/getAllMaps/all').subscribe((data)=>{
       this.Maps = data;
     });
 
@@ -63,7 +63,7 @@ export class MapsComponent implements OnInit{
   //Map type change make API call by passing the mapType as Path Param
   public onTypeChange(mapType:any):void{
     //fetch only the specific maps from the backend api
-    this.api.LoadMaps(`https://mean-valorant-api.onrender.com/getAllMaps/${mapType}`).subscribe((data)=>{
+    this.api.LoadMaps(`https://mean-valorant-api.vercel.app/getAllMaps/${mapType}`).subscribe((data)=>{
       this.Maps = data;
     });
   }

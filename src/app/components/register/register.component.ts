@@ -30,12 +30,12 @@ export class RegisterComponent implements OnInit{
     })
 
     //Load the list of countries for the drop-down of form
-    this.api.GetAllCountries('https://mean-valorant-api.onrender.com/getAllCountries').subscribe((data)=>{
+    this.api.GetAllCountries('https://mean-valorant-api.vercel.app/getAllCountries').subscribe((data)=>{
       this.Countries = data[0].data;
     });
 
     //Load all the registers users on page startup
-    this.api.GetAllUsers('https://mean-valorant-api.onrender.com/getAllUsers').subscribe((data)=>{
+    this.api.GetAllUsers('https://mean-valorant-api.vercel.app/getAllUsers').subscribe((data)=>{
       this.Users = data;
     });    
   }
@@ -143,7 +143,7 @@ export class RegisterComponent implements OnInit{
     console.log(obj);
 
     //Onsubmit we make the POST mode API call to insert the User in DB
-    this.api.RegUser('https://mean-valorant-api.onrender.com/registerUsers/',obj).subscribe((data)=>{
+    this.api.RegUser('https://mean-valorant-api.vercel.app/registerUsers/',obj).subscribe((data)=>{
       //Get the code coming from the response
       console.log(data.code);
 
